@@ -3,364 +3,410 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light" />
+  <meta name="description" content="As regras de uso do WaiKru: teste grátis, assinatura, responsabilidades e contato." />
   <title>Termos de Uso — WaiKru</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Só os glifos da marca, como no app (ADR 0012): Playfair Display + Noto Serif Thai, peso 500. -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500&family=Playfair+Display:wght@500&text=WaiKru%E0%B9%84%E0%B8%AB%E0%B8%A7%E0%B9%89%E0%B8%84%E0%B8%A3%E0%B8%B9&display=block" />
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+    /* Paleta do app (ADR 0003 + WaiKruWordmark.kt). O vermelho é detalhe, nunca fundo. */
     :root {
-      --bg: #0f0f0f;
-      --surface: #1a1a1a;
-      --border: #2a2a2a;
-      --text: #e8e8e8;
-      --text-muted: #888;
-      --accent: #e63c2f;
-      --accent-light: #ff5a4d;
+      color-scheme: light;
+      --creme: #F5F1E8;
+      --cartao: #FFFFFF;
+      --tinta: #1A1A1A;
+      --apagado: #5E5A52;
+      --trilho: #E0DCD3;
+      --marca: #9E101F;
     }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { -webkit-text-size-adjust: 100%; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.7;
+      margin: 0;
+      background: var(--creme);
+      color: var(--tinta);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       font-size: 16px;
+      line-height: 1.65;
     }
 
-    header {
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
-      padding: 20px 24px;
-      display: flex;
+    .topo {
+      padding: 40px 16px 28px;
+      text-align: center;
+    }
+
+    .marca {
+      display: inline-flex;
+      flex-direction: column;
       align-items: center;
-      gap: 12px;
+      text-decoration: none;
+      color: var(--tinta);
     }
 
-    .logo-mark {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      overflow: hidden;
-      flex-shrink: 0;
+    .marca .thai {
+      font-family: "Noto Serif Thai", serif;
+      font-weight: 500;
+      font-size: 15px;          /* 40% do corpo do wordmark, como no app */
+      line-height: 1.6;
+      color: var(--marca);
     }
 
-    .logo-mark img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
+    .marca .latino {
+      font-family: "Playfair Display", serif;
+      font-weight: 500;
+      font-size: 38px;
+      line-height: 1;
     }
 
-    header span {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--text);
-    }
+    .marca .kru { color: var(--marca); }
 
-    .container {
-      max-width: 760px;
+    main {
+      max-width: 720px;
       margin: 0 auto;
-      padding: 48px 24px 80px;
+      padding: 0 16px 48px;
+    }
+
+    .folha {
+      background: var(--cartao);
+      border-radius: 16px;
+      padding: 36px 40px 40px;
     }
 
     h1 {
       font-size: 28px;
-      font-weight: 800;
-      margin-bottom: 8px;
-      color: #fff;
+      line-height: 1.25;
+      margin: 0 0 6px;
+      letter-spacing: -0.01em;
     }
 
-    .updated {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-bottom: 40px;
+    .data {
+      margin: 0 0 28px;
+      color: var(--apagado);
+      font-size: 14px;
     }
 
-    .intro {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--accent);
-      border-radius: 8px;
-      padding: 20px 24px;
-      margin-bottom: 40px;
-      color: var(--text-muted);
+    .resumo {
+      margin: 0 0 32px;
+      padding: 18px 20px;
+      background: var(--creme);
+      border-radius: 12px;
       font-size: 15px;
     }
 
+    .resumo p:last-child { margin-bottom: 0; }
+
+    nav.indice {
+      margin: 0 0 8px;
+      font-size: 15px;
+    }
+
+    nav.indice ol {
+      margin: 8px 0 0;
+      padding-left: 22px;
+      columns: 2;
+      column-gap: 32px;
+    }
+
+    nav.indice li { margin-bottom: 4px; break-inside: avoid; }
+
     h2 {
-      font-size: 18px;
-      font-weight: 700;
-      color: #fff;
-      margin-top: 40px;
-      margin-bottom: 12px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--border);
+      font-size: 19px;
+      line-height: 1.35;
+      margin: 40px 0 12px;
+      padding-top: 20px;
+      border-top: 1px solid var(--trilho);
+      scroll-margin-top: 16px;
     }
 
-    p {
-      margin-bottom: 14px;
-      color: var(--text);
+    h2 .n {
+      color: var(--marca);
+      font-variant-numeric: tabular-nums;
+      margin-right: 6px;
     }
 
-    ul {
-      margin: 12px 0 16px 0;
-      padding-left: 20px;
+    h3 {
+      font-size: 16px;
+      margin: 24px 0 8px;
     }
 
-    li {
-      margin-bottom: 8px;
-      color: var(--text);
+    p { margin: 0 0 14px; }
+
+    ul { margin: 0 0 16px; padding-left: 22px; }
+
+    li { margin-bottom: 6px; }
+
+    a { color: var(--marca); text-underline-offset: 2px; }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.88em;
+      background: var(--creme);
+      padding: 1px 5px;
+      border-radius: 4px;
+      overflow-wrap: anywhere;
     }
 
-    .plan-grid {
+    /* Blocos "o quê / para quê" no lugar de tabela: leem bem em 360px sem rolar de lado. */
+    .itens { margin: 8px 0 20px; }
+
+    .item {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--trilho);
+    }
+
+    .item:first-child { border-top: 1px solid var(--trilho); }
+
+    .item h3 { margin: 0 0 4px; }
+
+    .item p { margin: 0 0 6px; }
+
+    .item .para {
+      color: var(--apagado);
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .direitos {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin: 20px 0;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 12px 0 18px;
+      padding: 0;
+      list-style: none;
     }
 
-    .plan-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
+    .direitos li {
+      margin: 0;
+      padding: 12px 14px;
+      background: var(--creme);
       border-radius: 10px;
-      padding: 20px;
-    }
-
-    .plan-card.pro {
-      border-color: var(--accent);
-    }
-
-    .plan-card .plan-name {
-      font-size: 13px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-    }
-
-    .plan-card.pro .plan-name {
-      color: var(--accent-light);
-    }
-
-    .plan-card .plan-desc {
-      font-size: 14px;
-      color: var(--text);
-    }
-
-    .plan-card ul {
-      margin-top: 10px;
       font-size: 14px;
     }
 
-    .highlight-box {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 16px 20px;
-      margin: 16px 0;
-      font-size: 14px;
-      color: var(--text-muted);
+    .direitos strong { display: block; font-size: 15px; }
+
+    .contato {
+      margin: 12px 0 0;
+      padding: 18px 20px;
+      border: 1px solid var(--trilho);
+      border-left: 3px solid var(--marca);
+      border-radius: 10px;
     }
 
-    .highlight-box strong {
-      color: var(--text);
-    }
-
-    .contact-box {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 20px 24px;
-      margin-top: 16px;
-    }
-
-    .contact-box a {
-      color: var(--accent-light);
-      text-decoration: none;
-    }
-
-    .contact-box a:hover {
-      text-decoration: underline;
-    }
+    .contato p:last-child { margin-bottom: 0; }
 
     footer {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 16px 40px;
       text-align: center;
-      padding: 32px 24px;
-      border-top: 1px solid var(--border);
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    footer a {
-      color: var(--accent-light);
-      text-decoration: none;
+      color: var(--apagado);
+      font-size: 14px;
     }
 
     @media (max-width: 600px) {
-      h1 { font-size: 22px; }
-      h2 { font-size: 16px; }
-      .plan-grid { grid-template-columns: 1fr; }
+      .topo { padding: 28px 16px 20px; }
+      .folha { padding: 24px 20px 28px; border-radius: 14px; }
+      h1 { font-size: 24px; }
+      h2 { font-size: 18px; margin-top: 32px; }
+      nav.indice ol { columns: 1; }
+      .direitos { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-<header>
-  <div class="logo-mark"><img src="data:image/png;base64,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" alt="WaiKru" /></div>
-  <span>WaiKru</span>
+<header class="topo">
+  <a class="marca" href="termos-de-uso.html" aria-label="WaiKru">
+    <span class="thai" aria-hidden="true">ไหว้ครู</span>
+    <span class="latino" aria-hidden="true">Wai<span class="kru">Kru</span></span>
+  </a>
 </header>
 
-<div class="container">
-  <h1>Termos de Uso</h1>
-  <p class="updated">Última atualização: junho de 2026</p>
+<main>
+  <article class="folha">
+    <h1>Termos de Uso</h1>
+    <p class="data">Última atualização: setembro de 2026</p>
 
-  <div class="intro">
-    Ao baixar, instalar ou utilizar o WaiKru, você concorda com estes Termos de Uso. Leia com atenção antes de continuar. Se não concordar com alguma parte, não utilize o aplicativo.
-  </div>
-
-  <!-- 1 -->
-  <h2>1. Quem Somos</h2>
-  <p>O <strong>WaiKru</strong> é um aplicativo desenvolvido de forma independente para auxiliar <strong>professores de Muay Thai e artes marciais</strong> na gestão de alunos, presenças, aulas e finanças da academia.</p>
-  <div class="contact-box">
-    Raphael Coimbra · E-mail: <a href="mailto:rapha07.el@gmail.com">rapha07.el@gmail.com</a>
-  </div>
-
-  <!-- 2 -->
-  <h2>2. Quem Pode Usar</h2>
-  <p>O WaiKru é destinado a <strong>pessoas maiores de 18 anos</strong> que atuam como professores ou gestores de academias de artes marciais. Ao criar uma conta, você declara que:</p>
-  <ul>
-    <li>Tem 18 anos ou mais</li>
-    <li>Tem capacidade legal para aceitar estes termos</li>
-    <li>As informações fornecidas no cadastro são verdadeiras</li>
-  </ul>
-
-  <!-- 3 -->
-  <h2>3. Descrição do Serviço</h2>
-  <p>O WaiKru oferece as seguintes funcionalidades:</p>
-  <ul>
-    <li>Cadastro e gestão de academias</li>
-    <li>Cadastro e acompanhamento de alunos</li>
-    <li>Sistema de graduação (faixas/khan do Muay Thai)</li>
-    <li>Controle de presença (check-in/check-out, QR Code)</li>
-    <li>Gestão de aulas e aulas recorrentes</li>
-    <li>Registro e histórico de pagamentos</li>
-    <li>Relatórios e dashboard financeiro</li>
-    <li>Anotações estruturadas sobre alunos</li>
-  </ul>
-
-  <!-- 4 -->
-  <h2>4. Planos e Assinatura</h2>
-
-  <div class="plan-grid">
-    <div class="plan-card">
-      <div class="plan-name">Plano Free</div>
-      <ul>
-        <li>1 academia</li>
-        <li>1 aluno</li>
-        <li>1 aula</li>
-        <li>Acesso a todas as telas e funcionalidades para os itens criados</li>
-      </ul>
+    <div class="resumo">
+      <p>Estes termos valem para quem baixa, instala ou usa o aplicativo <strong>WaiKru</strong>. Ao criar uma conta, você concorda com eles. Se não concordar com alguma parte, não use o app.</p>
+      <p>O jeito como tratamos os seus dados está na <a href="politica-de-privacidade.html">Política de Privacidade</a>, que faz parte destes termos.</p>
     </div>
-    <div class="plan-card pro">
-      <div class="plan-name">Plano Pro</div>
-      <ul>
-        <li>Academias ilimitadas</li>
-        <li>Alunos ilimitados</li>
-        <li>Aulas ilimitadas</li>
-        <li>Todos os recursos sem restrições</li>
-      </ul>
+
+    <nav class="indice" aria-label="Nesta página">
+      <strong>Nesta página</strong>
+      <ol>
+        <li><a href="#quem">Quem somos</a></li>
+        <li><a href="#quem-usa">Quem pode usar</a></li>
+        <li><a href="#servico">O que o app faz</a></li>
+        <li><a href="#assinatura">Teste grátis e assinatura</a></li>
+        <li><a href="#conta">Sua conta</a></li>
+        <li><a href="#alunos">Dados dos seus alunos</a></li>
+        <li><a href="#uso">Uso aceitável</a></li>
+        <li><a href="#propriedade">Propriedade intelectual</a></li>
+        <li><a href="#disponibilidade">Disponibilidade</a></li>
+        <li><a href="#responsabilidade">Limites de responsabilidade</a></li>
+        <li><a href="#encerramento">Encerramento da conta</a></li>
+        <li><a href="#alteracoes">Mudanças nestes termos</a></li>
+        <li><a href="#lei">Lei aplicável e foro</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ol>
+    </nav>
+
+    <!-- 1 -->
+    <h2 id="quem"><span class="n">1.</span>Quem somos</h2>
+    <p>O <strong>WaiKru</strong> é um aplicativo feito de forma independente para o <strong>professor de Muay Thai</strong> organizar os alunos, as turmas, a presença e o dinheiro das aulas que dá, em academias de outras pessoas, na própria escola ou em aulas particulares.</p>
+    <div class="contato">
+      <p><strong>Raphael Coimbra</strong><br />
+      E-mail: <a href="mailto:rapha07.el@gmail.com">rapha07.el@gmail.com</a></p>
     </div>
-  </div>
 
-  <p><strong>Como funciona o upgrade:</strong> ao tentar criar um segundo item (academia, aluno ou aula) no plano Free, o app apresentará a tela de assinatura. Se optar por não assinar, você voltará para onde estava — nenhuma funcionalidade existente é bloqueada.</p>
+    <!-- 2 -->
+    <h2 id="quem-usa"><span class="n">2.</span>Quem pode usar</h2>
+    <p>O WaiKru é para <strong>maiores de 18 anos</strong> que dão aula de Muay Thai ou de outra arte marcial. Ao criar uma conta, você declara que:</p>
+    <ul>
+      <li>tem 18 anos ou mais;</li>
+      <li>pode aceitar estes termos legalmente;</li>
+      <li>as informações do seu cadastro são verdadeiras.</li>
+    </ul>
 
-  <p><strong>Cobrança:</strong> as assinaturas são processadas pela plataforma da loja (Google Play ou App Store) e gerenciadas pelo RevenueCat. Os preços e condições de renovação são exibidos antes de qualquer confirmação de compra. O valor é cobrado na moeda local configurada na sua conta da loja.</p>
+    <!-- 3 -->
+    <h2 id="servico"><span class="n">3.</span>O que o app faz</h2>
+    <ul>
+      <li>Organiza seus <strong>locais</strong> de trabalho: cada academia e as aulas particulares, agrupadas no Personal.</li>
+      <li>Monta <strong>turmas</strong> que se repetem toda semana e as <strong>aulas</strong> que nascem delas, além das aulas avulsas.</li>
+      <li>Registra a <strong>presença</strong> e <strong>finaliza</strong> a aula: quem veio, o que foi treinado e como foi.</li>
+      <li>Guarda a ficha de cada <strong>aluno</strong>, com o prajied, o histórico de promoções, a presença das últimas semanas e as anotações que você escreve.</li>
+      <li>Soma no <strong>caixa</strong> as aulas que você deu no mês e mostra quanto falta dar. O caixa conta trabalho feito. Ele não registra se a academia ou o aluno já pagou você.</li>
+      <li>Aponta na <strong>análise</strong> quem parou de aparecer nas aulas.</li>
+      <li>Abre o <strong>WhatsApp</strong> para você chamar um aluno e guarda os seus <strong>eventos</strong>.</li>
+    </ul>
+    <p>O app pode ganhar, mudar ou perder funções com o tempo.</p>
 
-  <p><strong>Renovação automática:</strong> as assinaturas renovam automaticamente no fim de cada período (mensal ou anual). Você pode cancelar a qualquer momento nas configurações da sua conta na loja — o acesso Pro permanece ativo até o fim do período já pago.</p>
+    <!-- 4 -->
+    <h2 id="assinatura"><span class="n">4.</span>Teste grátis e assinatura</h2>
 
-  <p><strong>Reembolsos:</strong> reembolsos são gerenciados diretamente pela Google Play ou App Store, conforme as políticas de cada plataforma. O WaiKru não processa reembolsos diretamente.</p>
+    <h3>Teste grátis de 14 dias</h3>
+    <p>Toda conta nova começa com <strong>14 dias de teste grátis</strong>, contados a partir do cadastro. O teste começa sozinho e você não precisa informar cartão. Durante o teste, o app funciona por inteiro, sem nenhuma função bloqueada.</p>
+    <p>O teste vale <strong>uma vez por e-mail</strong>. Ele não se renova, não pausa e não volta, nem se você excluir a conta e criar outra com o mesmo e-mail.</p>
 
-  <!-- 5 -->
-  <h2>5. Conta e Segurança</h2>
-  <p>Você é responsável por:</p>
-  <ul>
-    <li>Manter sua senha segura e confidencial</li>
-    <li>Todas as atividades realizadas na sua conta</li>
-    <li>Notificar imediatamente caso suspeite de acesso não autorizado</li>
-  </ul>
-  <p>Não compartilhe suas credenciais. Contas são individuais e não transferíveis.</p>
+    <h3>Depois do teste</h3>
+    <p>Quando o teste acaba, o app pede uma assinatura para continuar. Seus dados <strong>não são apagados</strong> e continuam guardados do jeito que você deixou. Você pode assinar quando quiser, sair da conta ou excluí-la.</p>
 
-  <!-- 6 -->
-  <h2>6. Dados dos Alunos — Sua Responsabilidade</h2>
-  <p>Ao cadastrar dados de alunos no WaiKru, você atua como <strong>controlador de dados</strong> nos termos da LGPD. Você é responsável por:</p>
-  <ul>
-    <li>Informar seus alunos sobre o uso do aplicativo para gestão dos dados deles</li>
-    <li>Obter o consentimento necessário antes de cadastrar dados de menores</li>
-    <li>Garantir que os dados inseridos são verdadeiros e utilizados apenas para fins legítimos de gestão da academia</li>
-    <li>Excluir dados de alunos que não são mais seus alunos, quando solicitado</li>
-  </ul>
+    <h3>Planos, preço e cobrança</h3>
+    <p>A assinatura tem um plano <strong>mensal</strong> e um <strong>anual</strong>. O preço, a moeda e as condições aparecem na tela de assinatura antes de você confirmar, com os valores informados pela Google Play ou pela App Store. A cobrança é feita pela loja na conta que você usa nela, e o RevenueCat faz a ponte entre a loja e o WaiKru.</p>
+    <!-- [PENDENTE DE VALIDAÇÃO] Os produtos (fighthub_pro, planos mensal e anual) ainda não estão configurados
+         no Google Play Console nem no RevenueCat (CLAUDE.md, Fase 5). O app só mostra o que a loja devolver
+         (PaywallOffer.kt, PlanPeriod { MONTHLY, ANNUAL }). Confirme os dois planos antes de publicar. -->
 
-  <!-- 7 -->
-  <h2>7. Uso Aceitável</h2>
-  <p>Você concorda em usar o WaiKru apenas para fins legítimos de gestão de academias de artes marciais. É <strong>proibido</strong>:</p>
-  <ul>
-    <li>Usar o app para fins ilegais ou que violem direitos de terceiros</li>
-    <li>Tentar acessar dados de outros professores ou academias</li>
-    <li>Fazer engenharia reversa, descompilar ou modificar o aplicativo</li>
-    <li>Usar meios automatizados para acessar o serviço (bots, scrapers)</li>
-    <li>Cadastrar dados falsos ou de pessoas sem seu consentimento</li>
-    <li>Revender, sublicenciar ou redistribuir o acesso ao serviço</li>
-  </ul>
+    <h3>Renovação e cancelamento</h3>
+    <p>A assinatura <strong>renova sozinha</strong> ao fim de cada período, mensal ou anual. Você cancela quando quiser, direto na loja (Google Play ou App Store), e o acesso continua até o fim do período já pago.</p>
 
-  <!-- 8 -->
-  <h2>8. Propriedade Intelectual</h2>
-  <p>O WaiKru, incluindo seu código, design, marca, ícones e conteúdo, é de propriedade do desenvolvedor e protegido por direitos autorais e outras leis de propriedade intelectual. Estes Termos não transferem nenhum direito de propriedade a você — apenas concedem uma licença limitada, não exclusiva e intransferível para uso pessoal do aplicativo.</p>
-  <p>Os dados que você insere no app (dados dos seus alunos, academias, aulas) permanecem de sua propriedade.</p>
+    <h3>A assinatura é sua, não do aparelho</h3>
+    <p>A assinatura fica ligada à sua conta do WaiKru. Se você trocar de celular ou reinstalar o app, basta entrar na sua conta para continuar assinado.</p>
 
-  <!-- 9 -->
-  <h2>9. Disponibilidade do Serviço</h2>
-  <p>Buscamos manter o WaiKru disponível 24/7, mas não garantimos disponibilidade ininterrupta. O serviço pode ficar indisponível temporariamente para:</p>
-  <ul>
-    <li>Manutenção programada (informada com antecedência quando possível)</li>
-    <li>Atualizações de segurança emergenciais</li>
-    <li>Situações fora do nosso controle (falhas de infraestrutura, força maior)</li>
-  </ul>
+    <h3>Reembolsos</h3>
+    <p>Reembolsos seguem as regras da Google Play ou da App Store e são pedidos diretamente a elas. O WaiKru não processa pagamentos nem reembolsos.</p>
 
-  <!-- 10 -->
-  <h2>10. Limitação de Responsabilidade</h2>
-  <p>O WaiKru é fornecido <strong>"como está"</strong> (as-is). Na máxima extensão permitida pela lei brasileira, não nos responsabilizamos por:</p>
-  <ul>
-    <li>Perda de dados causada por uso incorreto do aplicativo</li>
-    <li>Decisões financeiras ou pedagógicas tomadas com base nos dados do app</li>
-    <li>Danos indiretos, incidentais ou consequenciais</li>
-    <li>Interrupções de serviço além do nosso controle</li>
-  </ul>
+    <!-- 5 -->
+    <h2 id="conta"><span class="n">5.</span>Sua conta</h2>
+    <p>Você entra com e-mail e senha ou com a sua conta Google ou Apple. Você é responsável por:</p>
+    <ul>
+      <li>manter sua senha, ou o acesso à conta Google ou Apple que você usa, em segurança;</li>
+      <li>tudo o que for feito na sua conta;</li>
+      <li>avisar pelo e-mail da <a href="#contato">seção 14</a> se suspeitar que alguém entrou nela.</li>
+    </ul>
+    <p>A conta é pessoal. Não compartilhe o acesso e não a transfira para outra pessoa.</p>
 
-  <div class="highlight-box">
-    <strong>Importante:</strong> o WaiKru é uma ferramenta de gestão — as decisões sobre alunos, pagamentos e graduações são sempre do professor. O aplicativo não substitui julgamento profissional.
-  </div>
+    <!-- 6 -->
+    <h2 id="alunos"><span class="n">6.</span>Dados dos seus alunos</h2>
+    <p>Quando você cadastra alunos, você é o <strong>controlador</strong> desses dados, nos termos da LGPD. Por isso você se compromete a:</p>
+    <ul>
+      <li>avisar seus alunos de que usa o app para acompanhar as aulas deles;</li>
+      <li>ter a autorização dos pais ou responsáveis antes de cadastrar alunos menores de idade;</li>
+      <li>cadastrar dados verdadeiros e usá-los só para organizar suas aulas;</li>
+      <li>pedir a exclusão dos dados de um aluno quando ele pedir ou quando não fizer mais sentido guardá-los.</li>
+    </ul>
+    <p>O app não pede o e-mail do aluno e cria para ele um endereço interno que não recebe mensagens. <strong>Desativar</strong> um aluno tira a pessoa da sua lista, mas não apaga o que foi registrado sobre ela. Os detalhes estão nas seções 2, 5 e 7 da <a href="politica-de-privacidade.html">Política de Privacidade</a>.</p>
 
-  <!-- 11 -->
-  <h2>11. Cancelamento e Encerramento de Conta</h2>
-  <p><strong>Pelo usuário:</strong> você pode encerrar sua conta a qualquer momento entrando em contato pelo e-mail abaixo. Após a solicitação, seus dados serão excluídos em até 30 dias.</p>
-  <p><strong>Por nós:</strong> reservamo-nos o direito de suspender ou encerrar contas que violem estes Termos, com ou sem aviso prévio dependendo da gravidade da violação.</p>
-  <p><strong>Exportação de dados:</strong> antes de encerrar a conta, você pode solicitar uma cópia dos seus dados — processaremos o pedido em até 15 dias úteis.</p>
+    <!-- 7 -->
+    <h2 id="uso"><span class="n">7.</span>Uso aceitável</h2>
+    <p>Use o WaiKru só para organizar as suas aulas. É <strong>proibido</strong>:</p>
+    <ul>
+      <li>usar o app para algo ilegal ou que viole direitos de outras pessoas;</li>
+      <li>tentar acessar dados de outros professores ou de academias que não são suas;</li>
+      <li>fazer engenharia reversa, descompilar ou modificar o app;</li>
+      <li>acessar o serviço por meios automatizados, como robôs ou raspadores de dados;</li>
+      <li>cadastrar dados falsos ou de pessoas sem o conhecimento delas;</li>
+      <li>revender, sublicenciar ou redistribuir o acesso ao serviço.</li>
+    </ul>
 
-  <!-- 12 -->
-  <h2>12. Alterações nos Termos</h2>
-  <p>Podemos atualizar estes Termos periodicamente. Alterações significativas serão comunicadas dentro do aplicativo com pelo menos <strong>15 dias de antecedência</strong>. O uso continuado do app após a data de vigência das alterações constitui aceitação dos novos termos.</p>
+    <!-- 8 -->
+    <h2 id="propriedade"><span class="n">8.</span>Propriedade intelectual</h2>
+    <p>O WaiKru, incluindo o código, o design, a marca e os textos, pertence ao desenvolvedor e é protegido pela lei de direitos autorais e de propriedade intelectual. Estes termos não transferem nenhum desses direitos a você. Eles dão uma licença limitada, não exclusiva e intransferível para você usar o app no seu trabalho.</p>
+    <p>As fontes usadas na marca (Playfair Display e Noto Serif Thai) são distribuídas sob a SIL Open Font License, e o app inclui o texto dessas licenças.</p>
+    <p>Os dados que você coloca no app (locais, turmas, aulas, alunos e anotações) <strong>continuam sendo seus</strong>.</p>
 
-  <!-- 13 -->
-  <h2>13. Lei Aplicável e Foro</h2>
-  <p>Estes Termos são regidos pelas leis da <strong>República Federativa do Brasil</strong>. Para resolução de conflitos, as partes elegem o foro da comarca do desenvolvedor, com renúncia a qualquer outro, por mais privilegiado que seja.</p>
+    <!-- 9 -->
+    <h2 id="disponibilidade"><span class="n">9.</span>Disponibilidade</h2>
+    <p>Buscamos manter o WaiKru funcionando o tempo todo, mas não garantimos que ele nunca pare. O serviço pode ficar fora do ar por um tempo por causa de:</p>
+    <ul>
+      <li>manutenção, avisada com antecedência quando for possível;</li>
+      <li>correções de segurança urgentes;</li>
+      <li>situações fora do nosso controle, como falhas de infraestrutura ou força maior.</li>
+    </ul>
 
-  <!-- 14 -->
-  <h2>14. Contato</h2>
-  <p>Dúvidas sobre estes Termos, solicitações de dados ou qualquer outra questão:</p>
-  <div class="contact-box">
-    <strong>E-mail:</strong> <a href="mailto:rapha07.el@gmail.com">rapha07.el@gmail.com</a><br /><br />
-    Identifique seu e-mail com o assunto <em>"WaiKru — Termos de Uso"</em>. Responderemos em até <strong>15 dias úteis</strong>.
-  </div>
-</div>
+    <!-- 10 -->
+    <h2 id="responsabilidade"><span class="n">10.</span>Limites de responsabilidade</h2>
+    <p>O WaiKru é fornecido <strong>no estado em que se encontra</strong>. No limite permitido pela lei brasileira, não respondemos por:</p>
+    <ul>
+      <li>perda de dados causada por uso incorreto do app;</li>
+      <li>decisões financeiras ou pedagógicas tomadas com base no que o app mostra;</li>
+      <li>danos indiretos, incidentais ou consequentes;</li>
+      <li>interrupções do serviço fora do nosso controle.</li>
+    </ul>
+    <div class="resumo">
+      <p><strong>O app mostra fatos e a decisão é sua.</strong> O WaiKru mostra presença, aulas dadas e o histórico de prajied, mas nunca diz que um aluno está pronto para subir de prajied. Quem decide promoções, cobranças e o rumo das aulas é o professor. O caixa soma aulas dadas e não substitui a sua contabilidade.</p>
+    </div>
+
+    <!-- 11 -->
+    <h2 id="encerramento"><span class="n">11.</span>Encerramento da conta</h2>
+    <p><strong>Por você:</strong> exclua a conta quando quiser, no app, na tela de <strong>Perfil</strong> ou na tela de assinatura. A exclusão vale na hora e não pode ser desfeita. Excluir a conta <strong>não cancela a assinatura na loja</strong>: se você assina, cancele também na Google Play ou na App Store. O que é apagado e o que continua guardado está na <a href="politica-de-privacidade.html#exclusao">seção 7 da Política de Privacidade</a>.</p>
+    <p><strong>Por nós:</strong> podemos suspender ou encerrar contas que violem estes termos. Dependendo da gravidade, isso pode acontecer sem aviso prévio.</p>
+    <p><strong>Cópia dos seus dados:</strong> antes de excluir a conta, você pode pedir uma cópia dos seus dados pelo e-mail da <a href="#contato">seção 14</a>.</p>
+    <!-- [PENDENTE DE VALIDAÇÃO] O app não tem exportação de dados. A cópia é feita à mão pelo responsável; a
+         versão anterior prometia "em até 15 dias úteis". Confirme o prazo antes de voltar a prometer um. -->
+    <!-- [PENDENTE DE VALIDAÇÃO] "Excluir a conta não cancela a assinatura na loja": o app não chama nenhuma API
+         de cancelamento ao excluir (DELETE /auth/account em UserService.deleteAccount só anonimiza), e a loja é
+         quem controla a renovação. Vale confirmar num teste sandbox. -->
+
+    <!-- 12 -->
+    <h2 id="alteracoes"><span class="n">12.</span>Mudanças nestes termos</h2>
+    <p>Quando estes termos mudarem, a nova versão será publicada neste mesmo endereço, com a data atualizada no topo. Se você continuar usando o app depois disso, estará aceitando a nova versão.</p>
+    <!-- [PENDENTE DE VALIDAÇÃO] A versão anterior prometia aviso dentro do app com 15 dias de antecedência.
+         O app não tem mecanismo de aviso; a promessa saiu até existir um. -->
+
+    <!-- 13 -->
+    <h2 id="lei"><span class="n">13.</span>Lei aplicável e foro</h2>
+    <p>Estes termos seguem as leis da <strong>República Federativa do Brasil</strong>. Para resolver conflitos, fica eleito o foro da comarca do domicílio do desenvolvedor, salvo quando a lei garantir a você o direito de usar o foro do seu domicílio.</p>
+    <!-- [PENDENTE DE VALIDAÇÃO] Cláusula de foro. A versão anterior elegia o foro do desenvolvedor "com
+         renúncia a qualquer outro". Se o professor for tratado como consumidor, o CDC garante o foro do
+         domicílio dele. O texto acima ressalva isso, mas pede revisão jurídica. A comarca não está nomeada. -->
+
+    <!-- 14 -->
+    <h2 id="contato"><span class="n">14.</span>Contato</h2>
+    <p>Dúvidas sobre estes termos, pedidos sobre os seus dados ou qualquer outro assunto:</p>
+    <div class="contato">
+      <p><strong>E-mail:</strong> <a href="mailto:rapha07.el@gmail.com?subject=WaiKru%20%E2%80%94%20Termos%20de%20Uso">rapha07.el@gmail.com</a></p>
+      <p>Use o assunto <em>“WaiKru — Termos de Uso”</em>.</p>
+    </div>
+  </article>
+</main>
 
 <footer>
   <p>© 2026 WaiKru · <a href="politica-de-privacidade.html">Política de Privacidade</a></p>

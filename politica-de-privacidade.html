@@ -3,414 +3,473 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light" />
+  <meta name="description" content="Como o WaiKru trata os dados do professor e dos alunos que ele cadastra." />
   <title>Política de Privacidade — WaiKru</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Só os glifos da marca, como no app (ADR 0012): Playfair Display + Noto Serif Thai, peso 500. -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500&family=Playfair+Display:wght@500&text=WaiKru%E0%B9%84%E0%B8%AB%E0%B8%A7%E0%B9%89%E0%B8%84%E0%B8%A3%E0%B8%B9&display=block" />
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+    /* Paleta do app (ADR 0003 + WaiKruWordmark.kt). O vermelho é detalhe, nunca fundo. */
     :root {
-      --bg: #0f0f0f;
-      --surface: #1a1a1a;
-      --border: #2a2a2a;
-      --text: #e8e8e8;
-      --text-muted: #888;
-      --accent: #e63c2f;
-      --accent-light: #ff5a4d;
+      color-scheme: light;
+      --creme: #F5F1E8;
+      --cartao: #FFFFFF;
+      --tinta: #1A1A1A;
+      --apagado: #5E5A52;
+      --trilho: #E0DCD3;
+      --marca: #9E101F;
     }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { -webkit-text-size-adjust: 100%; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.7;
+      margin: 0;
+      background: var(--creme);
+      color: var(--tinta);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       font-size: 16px;
+      line-height: 1.65;
     }
 
-    header {
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
-      padding: 20px 24px;
-      display: flex;
+    .topo {
+      padding: 40px 16px 28px;
+      text-align: center;
+    }
+
+    .marca {
+      display: inline-flex;
+      flex-direction: column;
       align-items: center;
-      gap: 12px;
+      text-decoration: none;
+      color: var(--tinta);
     }
 
-    .logo-mark {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      overflow: hidden;
-      flex-shrink: 0;
+    .marca .thai {
+      font-family: "Noto Serif Thai", serif;
+      font-weight: 500;
+      font-size: 15px;          /* 40% do corpo do wordmark, como no app */
+      line-height: 1.6;
+      color: var(--marca);
     }
 
-    .logo-mark img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
+    .marca .latino {
+      font-family: "Playfair Display", serif;
+      font-weight: 500;
+      font-size: 38px;
+      line-height: 1;
     }
 
-    header span {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--text);
-    }
+    .marca .kru { color: var(--marca); }
 
-    .container {
-      max-width: 760px;
+    main {
+      max-width: 720px;
       margin: 0 auto;
-      padding: 48px 24px 80px;
+      padding: 0 16px 48px;
+    }
+
+    .folha {
+      background: var(--cartao);
+      border-radius: 16px;
+      padding: 36px 40px 40px;
     }
 
     h1 {
       font-size: 28px;
-      font-weight: 800;
-      margin-bottom: 8px;
-      color: #fff;
+      line-height: 1.25;
+      margin: 0 0 6px;
+      letter-spacing: -0.01em;
     }
 
-    .updated {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-bottom: 40px;
-    }
-
-    .intro {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--accent);
-      border-radius: 8px;
-      padding: 20px 24px;
-      margin-bottom: 40px;
-      color: var(--text-muted);
-      font-size: 15px;
-    }
-
-    h2 {
-      font-size: 18px;
-      font-weight: 700;
-      color: #fff;
-      margin-top: 40px;
-      margin-bottom: 12px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    p {
-      margin-bottom: 14px;
-      color: var(--text);
-    }
-
-    ul {
-      margin: 12px 0 16px 0;
-      padding-left: 20px;
-    }
-
-    li {
-      margin-bottom: 8px;
-      color: var(--text);
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 16px 0;
+    .data {
+      margin: 0 0 28px;
+      color: var(--apagado);
       font-size: 14px;
     }
 
-    th {
-      background: var(--surface);
-      text-align: left;
-      padding: 10px 14px;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--text-muted);
-      border: 1px solid var(--border);
+    .resumo {
+      margin: 0 0 32px;
+      padding: 18px 20px;
+      background: var(--creme);
+      border-radius: 12px;
+      font-size: 15px;
     }
 
-    td {
-      padding: 10px 14px;
-      border: 1px solid var(--border);
-      vertical-align: top;
+    .resumo p:last-child { margin-bottom: 0; }
+
+    nav.indice {
+      margin: 0 0 8px;
+      font-size: 15px;
     }
 
-    td:first-child {
-      font-weight: 600;
-      color: #fff;
-      white-space: nowrap;
+    nav.indice ol {
+      margin: 8px 0 0;
+      padding-left: 22px;
+      columns: 2;
+      column-gap: 32px;
     }
 
-    .tag {
-      display: inline-block;
-      background: var(--surface);
-      border: 1px solid var(--border);
+    nav.indice li { margin-bottom: 4px; break-inside: avoid; }
+
+    h2 {
+      font-size: 19px;
+      line-height: 1.35;
+      margin: 40px 0 12px;
+      padding-top: 20px;
+      border-top: 1px solid var(--trilho);
+      scroll-margin-top: 16px;
+    }
+
+    h2 .n {
+      color: var(--marca);
+      font-variant-numeric: tabular-nums;
+      margin-right: 6px;
+    }
+
+    h3 {
+      font-size: 16px;
+      margin: 24px 0 8px;
+    }
+
+    p { margin: 0 0 14px; }
+
+    ul { margin: 0 0 16px; padding-left: 22px; }
+
+    li { margin-bottom: 6px; }
+
+    a { color: var(--marca); text-underline-offset: 2px; }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.88em;
+      background: var(--creme);
+      padding: 1px 5px;
       border-radius: 4px;
-      padding: 2px 8px;
-      font-size: 12px;
-      color: var(--text-muted);
-      margin: 2px 2px 2px 0;
+      overflow-wrap: anywhere;
     }
 
-    .rights-grid {
+    /* Blocos "o quê / para quê" no lugar de tabela: leem bem em 360px sem rolar de lado. */
+    .itens { margin: 8px 0 20px; }
+
+    .item {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--trilho);
+    }
+
+    .item:first-child { border-top: 1px solid var(--trilho); }
+
+    .item h3 { margin: 0 0 4px; }
+
+    .item p { margin: 0 0 6px; }
+
+    .item .para {
+      color: var(--apagado);
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .direitos {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 12px;
-      margin: 16px 0;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 12px 0 18px;
+      padding: 0;
+      list-style: none;
     }
 
-    .right-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 14px 16px;
+    .direitos li {
+      margin: 0;
+      padding: 12px 14px;
+      background: var(--creme);
+      border-radius: 10px;
+      font-size: 14px;
     }
 
-    .right-card strong {
-      display: block;
-      font-size: 13px;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 4px;
+    .direitos strong { display: block; font-size: 15px; }
+
+    .contato {
+      margin: 12px 0 0;
+      padding: 18px 20px;
+      border: 1px solid var(--trilho);
+      border-left: 3px solid var(--marca);
+      border-radius: 10px;
     }
 
-    .right-card span {
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    .contact-box {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 20px 24px;
-      margin-top: 16px;
-    }
-
-    .contact-box a {
-      color: var(--accent-light);
-      text-decoration: none;
-    }
-
-    .contact-box a:hover {
-      text-decoration: underline;
-    }
+    .contato p:last-child { margin-bottom: 0; }
 
     footer {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 16px 40px;
       text-align: center;
-      padding: 32px 24px;
-      border-top: 1px solid var(--border);
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    footer a {
-      color: var(--accent-light);
-      text-decoration: none;
+      color: var(--apagado);
+      font-size: 14px;
     }
 
     @media (max-width: 600px) {
-      h1 { font-size: 22px; }
-      h2 { font-size: 16px; }
-      .rights-grid { grid-template-columns: 1fr; }
-      table { font-size: 13px; }
+      .topo { padding: 28px 16px 20px; }
+      .folha { padding: 24px 20px 28px; border-radius: 14px; }
+      h1 { font-size: 24px; }
+      h2 { font-size: 18px; margin-top: 32px; }
+      nav.indice ol { columns: 1; }
+      .direitos { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-<header>
-  <div class="logo-mark"><img src="data:image/png;base64,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" alt="WaiKru" /></div>
-  <span>WaiKru</span>
+<header class="topo">
+  <a class="marca" href="politica-de-privacidade.html" aria-label="WaiKru">
+    <span class="thai" aria-hidden="true">ไหว้ครู</span>
+    <span class="latino" aria-hidden="true">Wai<span class="kru">Kru</span></span>
+  </a>
 </header>
 
-<div class="container">
-  <h1>Política de Privacidade</h1>
-  <p class="updated">Última atualização: junho de 2026</p>
+<main>
+  <article class="folha">
+    <h1>Política de Privacidade</h1>
+    <p class="data">Última atualização: setembro de 2026</p>
 
-  <div class="intro">
-    Esta Política de Privacidade descreve como o WaiKru coleta, usa, armazena e protege as informações de seus usuários, em conformidade com a <strong>Lei Geral de Proteção de Dados (LGPD — Lei nº 13.709/2018)</strong>. Ao usar o aplicativo, você concorda com as práticas descritas aqui.
-  </div>
-
-  <!-- 1 -->
-  <h2>1. Responsável pelo Tratamento</h2>
-  <p>O WaiKru é desenvolvido e operado de forma independente por:</p>
-  <div class="contact-box">
-    <strong>Raphael Coimbra</strong><br />
-    E-mail: <a href="mailto:rapha07.el@gmail.com">rapha07.el@gmail.com</a>
-  </div>
-
-  <!-- 2 -->
-  <h2>2. Dados que Coletamos</h2>
-  <p>Coletamos apenas os dados necessários para o funcionamento do aplicativo:</p>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Categoria</th>
-        <th>Dados</th>
-        <th>Finalidade</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Conta do Professor</td>
-        <td>Nome, e-mail, senha (armazenada como hash bcrypt — nunca em texto puro)</td>
-        <td>Autenticação e identificação</td>
-      </tr>
-      <tr>
-        <td>Dados dos Alunos</td>
-        <td>Nome, e-mail, telefone, peso, altura, data de matrícula, faixa/graduação, anotações</td>
-        <td>Gestão pedagógica pela academia</td>
-      </tr>
-      <tr>
-        <td>Presença</td>
-        <td>Data, horário, método de check-in, status (presente/atrasado/falta)</td>
-        <td>Controle de frequência</td>
-      </tr>
-      <tr>
-        <td>Pagamentos</td>
-        <td>Valor, tipo, método, data de pagamento, status</td>
-        <td>Controle financeiro da academia</td>
-      </tr>
-      <tr>
-        <td>Uso do App</td>
-        <td>Telas visitadas, ações realizadas, relatórios de crash</td>
-        <td>Melhoria do produto (anonimizado)</td>
-      </tr>
-      <tr>
-        <td>Assinatura</td>
-        <td>Status da assinatura (Free/Pro), data de renovação</td>
-        <td>Controle de entitlements</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <p><strong>Não coletamos</strong>: dados de localização em tempo real, contatos do dispositivo, câmera (exceto leitura de QR Code para check-in) ou microfone.</p>
-
-  <!-- 3 -->
-  <h2>3. Base Legal para o Tratamento (LGPD)</h2>
-  <ul>
-    <li><strong>Execução de contrato</strong> (art. 7º, V): dados necessários para operar o serviço contratado</li>
-    <li><strong>Legítimo interesse</strong> (art. 7º, IX): dados de uso anônimos para melhorias do produto</li>
-    <li><strong>Consentimento</strong> (art. 7º, I): quando solicitamos permissões específicas do dispositivo</li>
-  </ul>
-
-  <!-- 4 -->
-  <h2>4. Compartilhamento com Terceiros</h2>
-  <p>Utilizamos os seguintes serviços de terceiros:</p>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Serviço</th>
-        <th>Empresa</th>
-        <th>Finalidade</th>
-        <th>Dados Compartilhados</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Firebase Analytics</td>
-        <td>Google LLC</td>
-        <td>Análise de uso de telas e funcionalidades</td>
-        <td>Eventos anônimos de navegação</td>
-      </tr>
-      <tr>
-        <td>Firebase Crashlytics</td>
-        <td>Google LLC</td>
-        <td>Relatórios de crash e estabilidade</td>
-        <td>Stack traces, versão do app, dispositivo</td>
-      </tr>
-      <tr>
-        <td>RevenueCat</td>
-        <td>RevenueCat Inc.</td>
-        <td>Gestão de assinaturas (In-App Purchase)</td>
-        <td>ID de usuário anônimo, status de assinatura</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <p><strong>Não vendemos, alugamos ou compartilhamos</strong> dados pessoais com anunciantes ou terceiros para fins de marketing.</p>
-
-  <!-- 5 -->
-  <h2>5. Dados dos Alunos — Responsabilidade do Professor</h2>
-  <p>O professor que cadastra alunos no WaiKru atua como <strong>controlador dos dados dos seus alunos</strong>. É responsabilidade do professor:</p>
-  <ul>
-    <li>Informar aos alunos que seus dados serão registrados no aplicativo</li>
-    <li>Obter o consentimento adequado para coleta e uso dos dados</li>
-    <li>Garantir que os dados inseridos são corretos e atualizados</li>
-    <li>Solicitar a exclusão dos dados ao encerrar o relacionamento com o aluno</li>
-  </ul>
-
-  <!-- 6 -->
-  <h2>6. Armazenamento e Segurança</h2>
-  <ul>
-    <li>Senhas armazenadas exclusivamente como <strong>hash BCrypt</strong> — o servidor nunca conhece sua senha em texto puro</li>
-    <li>Tokens de autenticação armazenados com <strong>criptografia AES-256</strong> no Android (EncryptedSharedPreferences) e <strong>Keychain</strong> no iOS</li>
-    <li>Toda comunicação entre o app e o servidor ocorre via <strong>HTTPS/TLS</strong></li>
-    <li>Backups do dispositivo <strong>excluem os tokens</strong> de autenticação automaticamente</li>
-    <li>Logs de produção não contêm PII (e-mails, nomes ou dados sensíveis)</li>
-  </ul>
-
-  <!-- 7 -->
-  <h2>7. Retenção de Dados</h2>
-  <ul>
-    <li><strong>Dados de conta</strong>: mantidos enquanto a conta estiver ativa</li>
-    <li><strong>Dados de alunos e histórico</strong>: mantidos enquanto o professor mantiver a academia ativa</li>
-    <li><strong>Logs de uso</strong>: anonimizados e retidos por até 12 meses</li>
-    <li><strong>Após exclusão de conta</strong>: dados removidos em até 30 dias, exceto onde exigido por lei</li>
-  </ul>
-
-  <!-- 8 -->
-  <h2>8. Seus Direitos (LGPD)</h2>
-  <div class="rights-grid">
-    <div class="right-card">
-      <strong>Acesso</strong>
-      <span>Solicitar cópia dos seus dados pessoais</span>
+    <div class="resumo">
+      <p>Esta política explica quais dados o aplicativo <strong>WaiKru</strong> (Android e iOS) guarda, para quê, com quem eles são compartilhados e como você pode pedir que sejam corrigidos ou apagados. Ela segue a <strong>Lei Geral de Proteção de Dados (LGPD, Lei nº 13.709/2018)</strong>.</p>
+      <p>O WaiKru é feito para o professor de Muay Thai organizar o próprio trabalho. Quem usa o app é o professor. Os alunos não entram no app: eles aparecem porque o professor os cadastra.</p>
     </div>
-    <div class="right-card">
-      <strong>Correção</strong>
-      <span>Corrigir dados incompletos ou desatualizados</span>
-    </div>
-    <div class="right-card">
-      <strong>Exclusão</strong>
-      <span>Solicitar a exclusão dos seus dados</span>
-    </div>
-    <div class="right-card">
-      <strong>Portabilidade</strong>
-      <span>Receber seus dados em formato estruturado</span>
-    </div>
-    <div class="right-card">
-      <strong>Revogação</strong>
-      <span>Revogar consentimento a qualquer momento</span>
-    </div>
-    <div class="right-card">
-      <strong>Informação</strong>
-      <span>Saber com quem seus dados são compartilhados</span>
-    </div>
-  </div>
-  <p>Para exercer qualquer um desses direitos, entre em contato pelo e-mail abaixo. Responderemos em até <strong>15 dias úteis</strong>.</p>
 
-  <!-- 9 -->
-  <h2>9. Menores de Idade</h2>
-  <p>O WaiKru é um aplicativo destinado a <strong>professores adultos</strong>. Não coletamos dados diretamente de menores de 18 anos. Dados de alunos menores de idade inseridos por professores são tratados sob a responsabilidade do professor, que deve ter o consentimento dos responsáveis legais.</p>
+    <nav class="indice" aria-label="Nesta página">
+      <strong>Nesta página</strong>
+      <ol>
+        <li><a href="#responsavel">Quem é o responsável</a></li>
+        <li><a href="#dados">Dados que o app guarda</a></li>
+        <li><a href="#finalidade">Para que e com qual base legal</a></li>
+        <li><a href="#terceiros">Com quem compartilhamos</a></li>
+        <li><a href="#alunos">Dados dos alunos</a></li>
+        <li><a href="#seguranca">Segurança</a></li>
+        <li><a href="#exclusao">Por quanto tempo e como apagar</a></li>
+        <li><a href="#direitos">Seus direitos</a></li>
+        <li><a href="#menores">Menores de idade</a></li>
+        <li><a href="#internacional">Transferência internacional</a></li>
+        <li><a href="#alteracoes">Mudanças nesta política</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ol>
+    </nav>
 
-  <!-- 10 -->
-  <h2>10. Transferência Internacional de Dados</h2>
-  <p>Os serviços do Google (Firebase) e do RevenueCat podem processar dados em servidores fora do Brasil. Ambas as empresas adotam mecanismos de proteção adequados à LGPD (cláusulas contratuais padrão e certificações de privacidade). Nossa API e banco de dados principal estão hospedados em servidores no Brasil.</p>
+    <!-- 1 -->
+    <h2 id="responsavel"><span class="n">1.</span>Quem é o responsável</h2>
+    <p>O WaiKru é desenvolvido e operado de forma independente por:</p>
+    <div class="contato">
+      <p><strong>Raphael Coimbra</strong><br />
+      E-mail: <a href="mailto:rapha07.el@gmail.com">rapha07.el@gmail.com</a></p>
+    </div>
 
-  <!-- 11 -->
-  <h2>11. Alterações nesta Política</h2>
-  <p>Podemos atualizar esta Política de Privacidade periodicamente. Em caso de alterações significativas, notificaremos os usuários dentro do aplicativo. A data da última atualização estará sempre indicada no topo desta página.</p>
+    <!-- 2 -->
+    <h2 id="dados"><span class="n">2.</span>Dados que o app guarda</h2>
+    <p>O WaiKru guarda o que você digita para organizar suas aulas e o mínimo necessário para a sua conta e a sua assinatura funcionarem.</p>
 
-  <!-- 12 -->
-  <h2>12. Contato</h2>
-  <p>Para dúvidas, solicitações ou exercício de direitos relacionados à privacidade:</p>
-  <div class="contact-box">
-    <strong>E-mail:</strong> <a href="mailto:rapha07.el@gmail.com">rapha07.el@gmail.com</a><br /><br />
-    Responderemos em até <strong>15 dias úteis</strong>. Identifique seu e-mail com o assunto <em>"LGPD — WaiKru"</em>.
-  </div>
-</div>
+    <div class="itens">
+      <div class="item">
+        <h3>Sua conta</h3>
+        <p>Nome e e-mail. Se você criar a conta com e-mail e senha, a senha é guardada só como hash bcrypt, nunca em texto. Se entrar com <strong>Google</strong> ou <strong>Apple</strong>, recebemos deles o seu nome, o seu e-mail e um identificador da sua conta naquele serviço. Nesse caso não existe senha do WaiKru.</p>
+        <p class="para">Para: entrar no app e identificar você.</p>
+      </div>
+      <div class="item">
+        <h3>Seu perfil de professor</h3>
+        <p>Seu prajied e o sistema de prajied que você usa, se dá aula particular, seu valor por hora, telefone e currículo (os dois últimos são opcionais), e em que etapa do cadastro inicial você parou.</p>
+        <p class="para">Para: montar o app do jeito que você trabalha e retomar o cadastro de onde você parou.</p>
+      </div>
+      <div class="item">
+        <h3>Seus locais de trabalho</h3>
+        <p>Das academias onde você dá aula: nome, endereço, telefone, e-mail, descrição, quanto a academia paga por hora e a taxa extra, se houver. As aulas particulares ficam agrupadas num local chamado Personal.</p>
+        <p class="para">Para: separar o seu trabalho por local.</p>
+      </div>
+      <div class="item">
+        <h3>Turmas e aulas</h3>
+        <p>Dias, horário, duração, preço, nível e limite de vagas. Quando você finaliza uma aula, o app guarda quem veio, o que foi treinado, a nota que você deu para a aula e o que você escreveu sobre ela.</p>
+        <p class="para">Para: montar sua agenda, registrar presença e somar as aulas dadas no caixa.</p>
+      </div>
+      <div class="item">
+        <h3>Alunos que você cadastra</h3>
+        <p>Nome e, se você quiser informar, WhatsApp, data de nascimento e como o aluno conheceu você. Também guardamos o prajied dele, o histórico de promoções, as turmas em que ele está, as presenças e as anotações que você escreve sobre ele.</p>
+        <p class="para">Para: acompanhar cada aluno. Veja a <a href="#alunos">seção 5</a>.</p>
+      </div>
+      <div class="item">
+        <h3>E-mail interno do aluno</h3>
+        <p>O app não pede o e-mail do aluno. Como o sistema precisa de um e-mail para cada pessoa cadastrada, o app cria sozinho um endereço interno no formato <code>nome.códigoaleatório@sem-email.fighthub.app</code>. Ele serve só para identificar o cadastro internamente. O aluno não entra no app com ele e o WaiKru não manda mensagens para esse endereço.</p>
+        <p class="para">Para: permitir cadastrar alunos sem saber o e-mail deles.</p>
+      </div>
+      <div class="item">
+        <h3>Eventos</h3>
+        <p>Título, data, local e descrição dos eventos que você cria.</p>
+        <p class="para">Para: organizar sua agenda de eventos.</p>
+      </div>
+      <div class="item">
+        <h3>Teste grátis e assinatura</h3>
+        <p>A data de criação da conta, que define os 14 dias de teste, e a situação da sua assinatura: se está ativa e até quando. O pagamento é feito na Google Play ou na App Store. O WaiKru não recebe nem guarda dados do seu cartão.</p>
+        <p class="para">Para: liberar o app durante o teste e depois dele para quem assina.</p>
+      </div>
+      <div class="item">
+        <h3>Uso do app e falhas</h3>
+        <p>Quais telas você abre e quais ações faz (como cadastrar um aluno, criar uma aula ou registrar presença). Esses registros levam o identificador interno da sua conta e, em algumas ações, o nome do aluno, da academia, da aula ou do evento envolvido. Quando o app trava ou dá erro, guardamos um relatório técnico com o modelo do aparelho, a versão do sistema e do app e o identificador da sua conta.</p>
+        <p class="para">Para: descobrir o que quebra e melhorar o app.</p>
+      </div>
+    </div>
+
+    <p><strong>O que o app não coleta:</strong> sua localização, seus contatos, suas fotos, a câmera e o microfone. O app não pede permissão para nada disso.</p>
+    <!-- [PENDENTE DE VALIDAÇÃO] O manifesto mesclado do build prodRelease declara com.google.android.gms.permission.AD_ID
+         e ACCESS_ADSERVICES_AD_ID, que chegam junto com o Firebase Analytics (composeApp/build/intermediates/
+         merged_manifest/prodRelease). Não há google_analytics_adid_collection_enabled=false no AndroidManifest.xml,
+         então o Firebase pode ler o ID de publicidade. A seção 4 diz isso. Se a coleta for desligada, tire a frase. -->
+    <!-- [PENDENTE DE VALIDAÇÃO] Os eventos do Firebase Analytics hoje levam student_name, academy_name,
+         class_name, event_name e o valor de pagamento como parâmetros (AnalyticsActionObserver.kt,
+         buildEventParams). A página diz isso porque é o que o código faz. Se os nomes forem tirados
+         dos eventos, este bloco e a seção 4 podem ficar mais simples. -->
+
+    <!-- 3 -->
+    <h2 id="finalidade"><span class="n">3.</span>Para que e com qual base legal</h2>
+    <ul>
+      <li><strong>Execução de contrato</strong> (art. 7º, V): sua conta, seu perfil, locais, turmas, aulas, alunos, eventos e a assinatura. Sem esses dados o app não funciona.</li>
+      <li><strong>Legítimo interesse</strong> (art. 7º, IX): os registros de uso e de falhas, para corrigir erros e melhorar o app, e a lista de e-mails que já usaram o teste grátis (<a href="#exclusao">seção 7</a>), para que o teste valha uma vez por pessoa.</li>
+    </ul>
+    <p>Não usamos seus dados para publicidade e não os vendemos.</p>
+
+    <!-- 4 -->
+    <h2 id="terceiros"><span class="n">4.</span>Com quem compartilhamos</h2>
+    <p>O WaiKru usa estes serviços de terceiros. Cada um recebe só o que precisa para a sua parte:</p>
+
+    <div class="itens">
+      <div class="item">
+        <h3>Firebase Analytics — Google</h3>
+        <p>Recebe os registros de uso descritos na seção 2: telas, ações, o identificador interno da sua conta e, em algumas ações, o nome do aluno, da academia, da aula ou do evento. Como todo app com Firebase Analytics, ele também registra identificadores do aparelho e, no Android, pode ler o identificador de publicidade. O WaiKru não usa esses dados para anúncios.</p>
+      </div>
+      <div class="item">
+        <h3>Firebase Crashlytics — Google</h3>
+        <p>Recebe os relatórios de falha: o que deu errado, modelo do aparelho, versões do sistema e do app e o identificador interno da sua conta.</p>
+      </div>
+      <div class="item">
+        <h3>RevenueCat — RevenueCat, Inc.</h3>
+        <p>Faz a ponte com a Google Play e a App Store para a assinatura. Recebe o identificador interno da sua conta, para que a assinatura fique ligada a você e não ao aparelho, e as informações da compra que a loja fornece.</p>
+      </div>
+      <div class="item">
+        <h3>Google Play e App Store — Google e Apple</h3>
+        <p>Processam o pagamento da assinatura, com os dados que você já tem cadastrados na loja.</p>
+      </div>
+      <div class="item">
+        <h3>Entrar com Google / Entrar com Apple</h3>
+        <p>Só se você escolher uma dessas opções. O Google ou a Apple confirmam quem você é e nos enviam seu nome, seu e-mail e o identificador da conta.</p>
+      </div>
+      <div class="item">
+        <h3>WhatsApp — Meta</h3>
+        <p>Quando você toca para chamar um aluno, o app abre o WhatsApp com o número dele. A conversa acontece no WhatsApp, e o WaiKru não envia nada ao WhatsApp por conta própria.</p>
+      </div>
+    </div>
+
+    <p>Os dados que você digita (locais, turmas, aulas, alunos, anotações) ficam no servidor do WaiKru e não são enviados a esses serviços, salvo os nomes que aparecem nos registros de uso descritos acima.</p>
+    <!-- [PENDENTE DE VALIDAÇÃO] Provedor de hospedagem da API e do banco. O app de produção aponta para
+         187.77.54.93 (build.gradle.kts, flavor prod; iosApp/Configuration/Prod.xcconfig). O whois desse
+         IP responde "Hostinger BR", mas o código não prova onde fica o servidor nem qual é o contrato.
+         Se quiser nomear o provedor aqui, confirme primeiro. -->
+
+    <!-- 5 -->
+    <h2 id="alunos"><span class="n">5.</span>Dados dos alunos</h2>
+    <p>Quando você cadastra alunos no WaiKru, você é o <strong>controlador</strong> desses dados, nos termos da LGPD, e o WaiKru trata os dados em seu nome. Por isso cabe a você:</p>
+    <ul>
+      <li>avisar seus alunos de que você usa o app para acompanhar as aulas deles;</li>
+      <li>ter a autorização dos responsáveis antes de cadastrar alunos menores de idade;</li>
+      <li>cadastrar só o que for necessário e manter os dados corretos;</li>
+      <li>pedir a exclusão dos dados de um aluno quando ele pedir ou quando não fizer mais sentido guardá-los.</li>
+    </ul>
+    <p><strong>Desativar não é apagar.</strong> Desativar um aluno tira a pessoa da sua lista e das contas, mas as presenças, as anotações e o histórico de prajied dele continuam guardados. Hoje o app não apaga o cadastro de um aluno. Para apagar, escreva para o e-mail da <a href="#contato">seção 12</a>.</p>
+
+    <!-- 6 -->
+    <h2 id="seguranca"><span class="n">6.</span>Segurança</h2>
+    <ul>
+      <li>Senhas são guardadas apenas como <strong>hash bcrypt</strong>. O WaiKru não tem como ler a sua senha.</li>
+      <li>No Android, os códigos de acesso da sua sessão ficam no aparelho com <strong>criptografia AES-256</strong> (EncryptedSharedPreferences).</li>
+      <li>No iOS, eles ficam no <strong>Keychain</strong>, presos a este aparelho.</li>
+      <li>No Android, esses códigos ficam fora do backup na nuvem e da transferência para outro aparelho.</li>
+      <li>Ao sair da conta, a sessão é encerrada neste aparelho. Ao excluir a conta, todas as sessões são encerradas.</li>
+    </ul>
+    <!-- [PENDENTE DE VALIDAÇÃO] Criptografia em trânsito (HTTPS/TLS). A versão anterior afirmava HTTPS, e o
+         código desmente: a API de produção é http://187.77.54.93:8080 (composeApp/build.gradle.kts, flavor
+         prod; iosApp/Configuration/Prod.xcconfig), o Android libera texto puro para esse IP
+         (res/xml/network_security_config.xml) e o iOS liga NSAllowsArbitraryLoads (iosApp/Info.plist).
+         Só volte a declarar HTTPS depois que a API tiver TLS. -->
+    <!-- [PENDENTE DE VALIDAÇÃO] "Logs de produção não contêm PII". O CallLogging do backend registra método
+         e caminho (presentation/plugins/Logging.kt) e o StatusPages loga stack trace completo em 500, que
+         pode carregar dados. O código não prova a ausência de PII; a frase saiu da página. -->
+
+    <!-- 7 -->
+    <h2 id="exclusao"><span class="n">7.</span>Por quanto tempo guardamos e como apagar</h2>
+    <p>Seus dados ficam guardados enquanto a sua conta existir. Se o teste grátis acabar e você não assinar, nada é apagado: tudo continua lá, do jeito que você deixou.</p>
+
+    <h3>Excluir sua conta</h3>
+    <p>Você pode excluir a conta a qualquer momento dentro do app, na tela de <strong>Perfil</strong> ou na tela de assinatura. A exclusão vale na hora e faz o seguinte:</p>
+    <ul>
+      <li>seu nome e seu e-mail são substituídos por valores genéricos;</li>
+      <li>sua senha deixa de funcionar;</li>
+      <li>o telefone e o currículo do seu perfil são apagados;</li>
+      <li>todas as suas sessões são encerradas.</li>
+    </ul>
+    <p><strong>O que continua guardado depois da exclusão:</strong></p>
+    <ul>
+      <li>os registros do seu trabalho (locais, turmas, aulas, presenças, anotações e histórico de prajied), ligados a um identificador interno que não traz mais o seu nome nem o seu e-mail;</li>
+      <li><strong>os alunos que você cadastrou</strong>, com os dados deles. Se quiser que eles também sejam apagados, peça pelo e-mail da <a href="#contato">seção 12</a>;</li>
+      <li>se você entrava com Google ou Apple, o identificador da sua conta nesse serviço;</li>
+      <li>o seu e-mail original numa lista separada, usada só para que uma conta nova com o mesmo e-mail não ganhe um segundo teste grátis. Você pode criar uma conta nova com esse e-mail, só que ela começa sem o teste.</li>
+    </ul>
+    <p>Os registros de uso e de falhas enviados ao Firebase e os dados da compra no RevenueCat seguem as regras de retenção desses serviços.</p>
+    <!-- [PENDENTE DE VALIDAÇÃO] A versão anterior prometia "dados removidos em até 30 dias" e "logs retidos
+         por até 12 meses". O código não faz nenhuma das duas coisas: DELETE /auth/account anonimiza na hora
+         e mantém o resto (FightHub-backend, UserService.deleteAccount), e não existe rotina de expurgo.
+         Retenção do Firebase Analytics e do Crashlytics é configuração do console, não do código. Se quiser
+         prometer prazos, defina-os antes. -->
+    <!-- [PENDENTE DE VALIDAÇÃO] UserService.deleteAccount não limpa Users.authProvider nem
+         Users.providerSubject, nem os dados das academias (endereço, telefone, e-mail). A página descreve o
+         comportamento atual. -->
+
+    <!-- 8 -->
+    <h2 id="direitos"><span class="n">8.</span>Seus direitos</h2>
+    <p>Pela LGPD, você pode pedir a qualquer momento:</p>
+    <ul class="direitos">
+      <li><strong>Confirmação e acesso</strong>saber se tratamos seus dados e receber uma cópia</li>
+      <li><strong>Correção</strong>corrigir dados incompletos ou desatualizados</li>
+      <li><strong>Exclusão</strong>apagar dados desnecessários ou tratados sem base legal</li>
+      <li><strong>Portabilidade</strong>receber seus dados em formato estruturado</li>
+      <li><strong>Informação</strong>saber com quem seus dados são compartilhados</li>
+      <li><strong>Oposição</strong>se opor a um tratamento feito por legítimo interesse</li>
+    </ul>
+    <p>Para exercer qualquer um deles, escreva para o e-mail da <a href="#contato">seção 12</a>. Responderemos em até <strong>15 dias</strong>. Seu nome, seu prajied, seus locais, turmas e alunos você também corrige direto no app.</p>
+    <!-- [PENDENTE DE VALIDAÇÃO] Prazo de resposta. A versão anterior dizia "15 dias úteis"; a LGPD (art. 19,
+         II) fala em 15 dias. É compromisso do responsável, não algo que o código prove. Confirme o prazo. -->
+
+    <!-- 9 -->
+    <h2 id="menores"><span class="n">9.</span>Menores de idade</h2>
+    <p>O WaiKru é para <strong>professores maiores de 18 anos</strong>. Ninguém com menos de 18 anos cria conta no app. Alunos menores de idade só aparecem quando o professor os cadastra, e nesse caso o professor responde por ter a autorização dos pais ou responsáveis (<a href="#alunos">seção 5</a>).</p>
+
+    <!-- 10 -->
+    <h2 id="internacional"><span class="n">10.</span>Transferência internacional</h2>
+    <p>Google (Firebase, Google Play e o login com Google), Apple (App Store e o login com Apple) e RevenueCat podem processar dados em servidores fora do Brasil, inclusive nos Estados Unidos. Essas empresas declaram adotar mecanismos de proteção compatíveis com a LGPD, como cláusulas contratuais padrão.</p>
+    <!-- [PENDENTE DE VALIDAÇÃO] A versão anterior afirmava "API e banco de dados hospedados em servidores no
+         Brasil". O código só mostra um IP (187.77.54.93); o whois aponta Hostinger BR, o que não prova a
+         localização física. A frase saiu até alguém confirmar com o provedor. -->
+
+    <!-- 11 -->
+    <h2 id="alteracoes"><span class="n">11.</span>Mudanças nesta política</h2>
+    <p>Quando esta política mudar, a nova versão será publicada neste mesmo endereço, com a data atualizada no topo.</p>
+    <!-- [PENDENTE DE VALIDAÇÃO] A versão anterior prometia "notificaremos os usuários dentro do aplicativo".
+         O app não tem mecanismo de aviso; a promessa saiu até existir um. -->
+
+    <!-- 12 -->
+    <h2 id="contato"><span class="n">12.</span>Contato</h2>
+    <p>Dúvidas, pedidos de acesso, correção ou exclusão:</p>
+    <div class="contato">
+      <p><strong>E-mail:</strong> <a href="mailto:rapha07.el@gmail.com?subject=LGPD%20%E2%80%94%20WaiKru">rapha07.el@gmail.com</a></p>
+      <p>Use o assunto <em>“LGPD — WaiKru”</em> e escreva do e-mail da sua conta, para podermos confirmar que o pedido é seu.</p>
+    </div>
+  </article>
+</main>
 
 <footer>
   <p>© 2026 WaiKru · <a href="termos-de-uso.html">Termos de Uso</a></p>
