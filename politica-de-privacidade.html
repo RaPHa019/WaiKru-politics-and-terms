@@ -95,6 +95,14 @@
       border-bottom: 1px solid var(--border);
     }
 
+    h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      margin-top: 28px;
+      margin-bottom: 10px;
+    }
+
     p {
       margin-bottom: 14px;
       color: var(--text);
@@ -212,7 +220,10 @@
       h1 { font-size: 22px; }
       h2 { font-size: 16px; }
       .rights-grid { grid-template-columns: 1fr; }
-      table { font-size: 13px; }
+      table { font-size: 13px; display: block; overflow-x: auto; }
+      th, td { padding: 8px 8px; }
+      td:first-child { white-space: normal; min-width: 84px; }
+      td, th { overflow-wrap: break-word; }
     }
   </style>
 </head>
@@ -225,7 +236,7 @@
 
 <div class="container">
   <h1>Política de Privacidade</h1>
-  <p class="updated">Última atualização: junho de 2026</p>
+  <p class="updated">Última atualização: novembro de 2026</p>
 
   <div class="intro">
     Esta Política de Privacidade descreve como o WaiKru coleta, usa, armazena e protege as informações de seus usuários, em conformidade com a <strong>Lei Geral de Proteção de Dados (LGPD — Lei nº 13.709/2018)</strong>. Ao usar o aplicativo, você concorda com as práticas descritas aqui.
@@ -253,7 +264,7 @@
     </thead>
     <tbody>
       <tr>
-        <td>Conta do Professor</td>
+        <td>Conta (professor ou aluno)</td>
         <td>Nome, e-mail, senha (armazenada como hash bcrypt — nunca em texto puro)</td>
         <td>Autenticação e identificação</td>
       </tr>
@@ -285,14 +296,86 @@
     </tbody>
   </table>
 
+  <h3>2.1 Se você é aluno e usa o app</h3>
+  <p>O aluno também pode ter conta própria no WaiKru: declarar os treinos, acompanhar a semana e se vincular aos seus professores. Abaixo está o que o app guarda sobre você nesse caso, para quê, e quem vê. "Professor com vínculo ativo" é o professor com quem você está vinculado hoje, por link, código ou pedido aceito.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Dado</th>
+        <th>O que é e para quê</th>
+        <th>Quem vê</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Perfil</td>
+        <td>Nome, foto, bio, WhatsApp (opcional), sistema e prajied que você declarou. Servem para seus professores reconhecerem você e para o app mostrar seu prajied.</td>
+        <td>Você. Seus professores veem nome, foto, WhatsApp e prajied. A bio não é enviada ao professor.</td>
+      </tr>
+      <tr>
+        <td>Objetivo</td>
+        <td>De 1 a 3 entre condicionamento, técnica, defesa pessoal e competir, mais um comentário opcional. Ajuda o professor a entender o que você quer do treino. Editável no Perfil.</td>
+        <td>Você e os professores com vínculo ativo. Se o vínculo for desativado, aquele professor deixa de ver.</td>
+      </tr>
+      <tr>
+        <td>Vínculos com professores</td>
+        <td>Com quem você treina, desde quando e como o vínculo nasceu (link pessoal ou código do professor, ou pedido aceito por ele). Os pedidos que você envia e ainda não foram respondidos também ficam guardados.</td>
+        <td>Você e o professor daquele vínculo ou pedido.</td>
+      </tr>
+      <tr>
+        <td>Treinos declarados</td>
+        <td>Cada "Treinei": data e hora, o professor (ou "sem professor no app") e uma nota escrita opcional. O treino aparece como <em>confirmado</em> quando o professor registra uma aula com você presente até 2 horas do horário que você informou.</td>
+        <td>Você vê tudo. O professor do treino, com vínculo ativo, vê só seu nome e o horário, para lembrar de registrar a aula e já marcar quem veio. <strong>Ele nunca vê sua nota escrita nem sua avaliação individual.</strong> Treino sem professor só você vê.</td>
+      </tr>
+      <tr>
+        <td>Avaliação do treino</td>
+        <td>Uma nota de 1 a 5 opcional, dada ao treino com professor.</td>
+        <td>A nota individual só você vê. O professor recebe apenas a <strong>média da aula</strong>, publicada uma única vez, 7 dias depois da aula, e só se 3 ou mais alunos avaliaram. Depois de publicada, ela não é recalculada. Com notas todas iguais, a média revela a nota de cada um: é o limite de qualquer média.</td>
+      </tr>
+      <tr>
+        <td>Meta semanal</td>
+        <td>Quantos dias por semana você quer treinar (1 a 7), ou nenhuma. Guardamos o histórico das mudanças, porque cada semana é comparada com a meta que valia quando ela fechou. Serve para mostrar sua semana e sua sequência.</td>
+        <td>Só você.</td>
+      </tr>
+      <tr>
+        <td>Anotações do professor</td>
+        <td>Textos que o professor escreve sobre você.</td>
+        <td>O professor que escreveu. Você vê só as que ele marcar como abertas, enquanto o vínculo estiver ativo.</td>
+      </tr>
+      <tr>
+        <td>Aparelho e fuso</td>
+        <td>O identificador de notificação do aparelho (Android ou iOS) e seu fuso horário. Servem para enviar as notificações e para calcular "hoje" e "esta semana" no seu horário. O identificador é apagado ao sair da conta.</td>
+        <td>Ninguém além do sistema de notificações.</td>
+      </tr>
+      <tr>
+        <td>Treino sem internet</td>
+        <td>Se você toca "Treinei" sem sinal, o treino fica guardado no aparelho até ser enviado. Sair da conta apaga o que não foi enviado.</td>
+        <td>Só você, no seu aparelho.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Se um professor desativar seu vínculo, ele deixa de ver seus treinos e seu objetivo, e você deixa de ver as anotações abertas dele. O professor continua vendo o que já registrou nas aulas dele: seu nome, foto, WhatsApp, prajied, a ficha que ele preencheu (peso, altura, guarda, nascimento) e suas presenças.</p>
+
+  <h3>2.2 Preferência de sparring</h3>
+  <p>Se você tem vínculo ativo com algum professor, o app pode perguntar, depois do seu segundo "Treinei", se você topa sparring (<em>Não curto · Leve · Mais pesado</em>). Se você topar, ele pergunta também qual equipamento você tem: luva, bucal e caneleira. A resposta é sobre o que você <strong>quer</strong>, nunca sobre o que você aguenta. Você pode responder "Agora não", e mudar ou tirar a resposta no Perfil quando quiser. Se você responder "Não curto" ou "Agora não", nenhum equipamento é guardado.</p>
+  <p>Para quê: o professor monta as duplas e decide em que aula dar sparring sem depender da memória. Quem vê: você, e <strong>todos os professores com vínculo ativo veem a mesma resposta, com a data em que você respondeu</strong>. Para o professor, "Agora não" aparece como "sem resposta". Se um vínculo for desativado, aquele professor deixa de ver. Guardamos o histórico das respostas para não perder a data, e tudo é apagado na exclusão da conta.</p>
+
   <p><strong>Não coletamos</strong>: dados de localização em tempo real, contatos do dispositivo, câmera (exceto leitura de QR Code para check-in) ou microfone.</p>
 
   <!-- 3 -->
   <h2>3. Base Legal para o Tratamento (LGPD)</h2>
   <ul>
     <li><strong>Execução de contrato</strong> (art. 7º, V): dados necessários para operar o serviço contratado</li>
-    <li><strong>Legítimo interesse</strong> (art. 7º, IX): dados de uso anônimos para melhorias do produto</li>
+    <li><strong>Legítimo interesse</strong> (art. 7º, IX): dados de uso anônimos para melhorias do produto, e o e-mail original de uma conta excluída, guardado só para impedir um segundo período de teste gratuito (seção 7)</li>
     <li><strong>Consentimento</strong> (art. 7º, I): quando solicitamos permissões específicas do dispositivo</li>
+  </ul>
+  <p><strong>Para o aluno que usa o app</strong>:</p>
+  <ul>
+    <li><strong>Execução de contrato</strong> (art. 7º, V): conta, vínculos e pedidos de vínculo, treinos declarados, meta semanal, o identificador de notificação e o fuso. Sem eles o app não funciona</li>
+    <li><strong>Consentimento</strong> (art. 7º, I): os dados opcionais, que você só informa se quiser — objetivo, avaliação do treino e preferência de sparring, e também foto, bio, WhatsApp e a nota do treino. Você revoga a qualquer momento: basta não responder, ou tirar ou mudar a resposta no Perfil. A avaliação já publicada na média da aula não sai da média, porque é agregada e não identifica você</li>
+    <li><strong>Notificações</strong>: o app pede a permissão do sistema no seu primeiro "Treinei", e você pode desligá-la nas configurações do aparelho</li>
   </ul>
 
   <!-- 4 -->
@@ -322,6 +405,12 @@
         <td>Stack traces, versão do app, dispositivo</td>
       </tr>
       <tr>
+        <td>Firebase Cloud Messaging</td>
+        <td>Google LLC</td>
+        <td>Envio de notificações (lembrete ao professor, pedido de vínculo, treino confirmado)</td>
+        <td>Identificador de notificação do aparelho e o texto da notificação</td>
+      </tr>
+      <tr>
         <td>RevenueCat</td>
         <td>RevenueCat Inc.</td>
         <td>Gestão de assinaturas (In-App Purchase)</td>
@@ -341,6 +430,7 @@
     <li>Garantir que os dados inseridos são corretos e atualizados</li>
     <li>Solicitar a exclusão dos dados ao encerrar o relacionamento com o aluno</li>
   </ul>
+  <p>Isso vale para os alunos que o professor cadastra pelo nome. Nesse caso o professor é o controlador e o WaiKru é o operador, que trata os dados em nome dele. Quando o aluno cria a própria conta, <strong>o WaiKru é o controlador</strong> do que o aluno informa nela (seção 2.1): o aluno vê, corrige e apaga esses dados pelo app, e o WaiKru os trata como descrito nesta política. Se o aluno cadastrado pelo nome criar conta depois, o professor pode juntar os dois registros; o app pergunta e nunca junta sozinho.</p>
 
   <!-- 6 -->
   <h2>6. Armazenamento e Segurança</h2>
@@ -358,7 +448,8 @@
     <li><strong>Dados de conta</strong>: mantidos enquanto a conta estiver ativa</li>
     <li><strong>Dados de alunos e histórico</strong>: mantidos enquanto o professor mantiver a academia ativa</li>
     <li><strong>Logs de uso</strong>: anonimizados e retidos por até 12 meses</li>
-    <li><strong>Após exclusão de conta</strong>: dados removidos em até 30 dias, exceto onde exigido por lei</li>
+    <li><strong>Após exclusão de conta</strong>: a exclusão é <strong>imediata</strong>. No mesmo momento, o nome vira "Conta excluída", o e-mail, a senha e os dados pessoais do perfil são apagados, a conta é desativada e todas as sessões abertas são encerradas. Guardamos à parte apenas o e-mail original, <strong>sem prazo</strong>, por legítimo interesse e só para que uma conta nova com o mesmo e-mail não ganhe outro período de teste gratuito</li>
+    <li><strong>Exclusão da conta do aluno</strong>: ao excluir a conta pelo Perfil, o app apaga na hora seus treinos (com nota e avaliação), sua meta semanal, suas respostas de sparring, seu objetivo, bio, WhatsApp, fuso, aparelhos e pedidos de vínculo, desliga a foto da conta e desativa seus vínculos. O arquivo da foto continua no nosso servidor depois da exclusão: só a ligação dele com a conta é apagada. Ficam, presos a "Conta excluída" e sem seu nome, os fatos registrados pelos professores (presenças, prajieds e anotações) e as médias de avaliação já publicadas, que são agregadas</li>
   </ul>
 
   <!-- 8 -->
@@ -389,11 +480,13 @@
       <span>Saber com quem seus dados são compartilhados</span>
     </div>
   </div>
+  <p><strong>Se você é aluno</strong>, parte disso já está no app: você vê seus treinos, sua meta e seu objetivo; corrige ou apaga um treino, muda a meta e o objetivo no Perfil; e exclui a conta pelo Perfil. Pelo e-mail você pode pedir também: cópia dos seus dados, a lista dos professores que veem seus dados, a correção de algo que um professor registrou sobre você (o professor é quem registra presença e confirma prajied) e informações sobre o que fica guardado após a exclusão.</p>
   <p>Para exercer qualquer um desses direitos, entre em contato pelo e-mail abaixo. Responderemos em até <strong>15 dias úteis</strong>.</p>
 
   <!-- 9 -->
   <h2>9. Menores de Idade</h2>
-  <p>O WaiKru é um aplicativo destinado a <strong>professores adultos</strong>. Não coletamos dados diretamente de menores de 18 anos. Dados de alunos menores de idade inseridos por professores são tratados sob a responsabilidade do professor, que deve ter o consentimento dos responsáveis legais.</p>
+  <p>Conta própria no WaiKru, de professor ou de aluno, só a partir de <strong>18 anos</strong>. Hoje o cadastro não pergunta nem verifica a idade de quem cria a conta.</p>
+  <p>O aluno menor de 18 anos pode ser cadastrado pelo professor. Nesse caso vale a seção 5: o professor é o controlador desses dados e responde pelo consentimento dos pais ou responsáveis legais (LGPD, art. 14).</p>
 
   <!-- 10 -->
   <h2>10. Transferência Internacional de Dados</h2>
